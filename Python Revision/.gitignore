@@ -1,0 +1,5 @@
+# Virtual environments
+py-env/
+venv/
+*.py-env/
+.py-venv/

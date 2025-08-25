@@ -1,0 +1,153 @@
+<html>
+<head>
+    <title>FWI Prediction</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .center-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login {
+            background: #fff;
+            max-width: 680px;
+            width: 100%;
+            padding: 40px 30px 30px 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        h1 {
+            text-align: center;
+            color: #2d6cdf;
+            margin-bottom: 24px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        form {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px 16px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        form input[type="text"] {
+            padding: 10px 12px;
+            border: 1px solid #bfc9d4;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+            background: #f5f8fd;
+        }
+        form input[type="text"]:focus {
+            border-color: #2d6cdf;
+            outline: none;
+            background: #e0eafc;
+        }
+        label {
+            font-size: 15px;
+            color: #2d6cdf;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        .btn {
+            grid-column: 1 / span 3;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #2d6cdf 0%, #5fa8d3 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(45,108,223,0.08);
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: linear-gradient(90deg, #5fa8d3 0%, #2d6cdf 100%);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 32px;
+            font-size: 22px;
+            font-weight: 500;
+            background: #e0eafc;
+            border-radius: 8px;
+            padding: 12px;
+        }
+        @media (max-width: 800px) {
+            .login {
+                max-width: 98vw;
+                padding: 18px 8px;
+            }
+            form {
+                grid-template-columns: 1fr;
+            }
+            .btn {
+                grid-column: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="center-container">
+        <div class="login">
+            <h1>FWI Prediction</h1>
+            <!-- Main Input For Receiving Query to our ML -->
+            <form action="{{ url_for('predict_datapoint')}}" method="post">
+                <div class="form-group">
+                    <label for="Temperature">Temperature</label>
+                    <input type="text" name="Temperature" id="Temperature" placeholder="Temperature" required="required" />
+                </div>
+                <div class="form-group">
+                    <label for="RH">RH</label>
+                    <input type="text" name="RH" id="RH" placeholder="RH" required="required" />
+                </div>
+                <div class="form-group">
+                    <label for="Ws">Ws</label>
+                    <input type="text" name="Ws" id="Ws" placeholder="Ws" required="required" />
+                </div>
+                <div class="form-group">
+                    <label for="Rain">Rain</label>
+                    <input type="text" name="Rain" id="Rain" placeholder="Rain" required="required" />
+                </div>
+                <div class="form-group">
+                    <label for="FFMC">FFMC</label>
+                    <input type="text" name="FFMC" id="FFMC" placeholder="FFMC" required="required" />
+                </div>
+                <div class="form-group">
+                    <label for="DMC">DMC</label>
+                    <input type="text" name="DMC" id="DMC" placeholder="DMC" required="required" />
+                </div>
+                <div class="form-group">
+                    <label for="ISI">ISI</label>
+                    <input type="text" name="ISI" id="ISI" placeholder="ISI" required="required" />
+                </div>
+                <div class="form-group">
+                    <label for="Classes">Classes</label>
+                    <input type="text" name="Classes" id="Classes" placeholder="Classes" required="required" />
+                </div>
+                <div class="form-group">
+                    <label for="Region">Region</label>
+                    <input type="text" name="Region" id="Region" placeholder="Region" required="required" />
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+            </form>
+            <h2>
+                The FWI prediction is: {{result}}
+            </h2>
+        </div>
+    </div>
+</body>
+</html>
